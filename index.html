@@ -122,7 +122,7 @@
             
             <!-- End Goal -->
             <div class="relative z-10 flex justify-center mt-16">
-                <div class="bg-red-700 text-white px-8 py-4 rounded-xl shadow-lg transform rotate-[-2deg] border-4 border-yellow-400">
+                <div id="destination-card" class="bg-red-700 text-white px-8 py-4 rounded-xl shadow-lg transform rotate-[-2deg] border-4 border-yellow-400">
                     <h3 class="text-xl font-bold font-serif">Destination Reached: <br/> A Greener Holiday!</h3>
                 </div>
             </div>
@@ -202,7 +202,8 @@
     </section>
 
     <footer class="bg-green-900 text-green-100 py-6 text-center">
-        <p class="text-sm">A non-commercial student project for English Class, created with assistance from Gemini(AI).
+        <p class="text-sm">A non-commercial student project for English Class, created with assistance from Gemini(AI).</p>
+    </footer>
 
     <script>
         // Generate straight SVG path for desktop
@@ -210,26 +211,35 @@
             const svg = document.getElementById('timeline-svg');
             if (!svg || window.innerWidth < 768) return;
             
-            const container = document.getElementById('stops-container');
+            // Get the wrapper element to determine true coordinate space
+            const wrapper = svg.parentElement;
+            const width = wrapper.offsetWidth;
+            const height = wrapper.offsetHeight;
             
             // Wait for DOM to be ready
             setTimeout(() => {
-                // Find destination element
-                const destination = document.querySelector('[class*="Destination"]')?.parentElement;
-                let svgHeight = container.offsetHeight;
+                // Find destination element by its ID (added in HTML)
+                const destination = document.getElementById('destination-card');
+                
+                let lineEndY = height; // Fallback
+                
                 if (destination) {
+                    // Calculate center of destination relative to wrapper
                     const destRect = destination.getBoundingClientRect();
-                    const containerRect = container.getBoundingClientRect();
-                    const destTop = destRect.top - containerRect.top + container.scrollTop;
+                    const wrapperRect = wrapper.getBoundingClientRect();
+                    
+                    const destTop = destRect.top - wrapperRect.top;
                     const destCenterY = destTop + (destRect.height / 2);
-                    svgHeight = destCenterY;
+                    lineEndY = destCenterY;
                 }
                 
-                svg.setAttribute('height', svgHeight);
-                svg.setAttribute('viewBox', `0 0 100 ${svgHeight}`);
+                // Set viewBox to match pixel dimensions exactly (1:1 mapping)
+                svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+                // Ensure SVG itself takes defined size if not absolute, though inset-0 handles it
                 
-                // Build straight path - simply a vertical line down the center
-                const pathData = `M 50 0 L 50 ${svgHeight}`;
+                // Build straight path - vertical line down the center of the container
+                const centerX = width / 2;
+                const pathData = `M ${centerX} 0 L ${centerX} ${lineEndY}`;
                 
                 // Clear existing path and create new one
                 svg.innerHTML = '';
@@ -264,15 +274,15 @@
                     "Save gift bags and ribbons to reuse next year."
                 ],
                 resources: [
-                    { title: "Furoshiki Wrapping Basics", content: "Furoshiki is a traditional Japanese method of using a single piece of cloth to wrap gifts. Lay the cloth flat, place the gift in the center, and tie opposite corners together. You can create beautiful knots and bows. It's reusable and elegant." },
-                    { title: "Creative Recycled Wrapping", content: "Use old maps, newspapers, or even brown paper grocery bags. Decorate them with natural elements like sprigs of pine, dried orange slices, or twine. Get creative with stamps or hand-drawn designs." }
+                    { title: "Furoshiki Wrapping Basics", content: "Furoshiki is a traditional Japanese method of using a single piece of cloth to wrap gifts. Lay the cloth flat, place the gift in the center, and tie the corners. It's elegant and zero-waste." },
+                    { title: "Creative Recycled Wrapping", content: "Use old maps, newspapers, or even brown paper grocery bags. Decorate them with natural elements like sprigs of pine, dried orange slices, or cinnamon sticks for a rustic, sustainable look." }
                 ]
             },
             {
                 id: 2,
                 title: "Light Right",
                 description: "Brighten the holidays without burning through energy. Efficient lighting choices save money and reduce the carbon footprint of your decorations.",
-                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`,
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`,
                 color: "bg-yellow-500",
                 position: "right",
                 list: [
@@ -282,8 +292,8 @@
                     "Limit outdoor display hours to prime evening time."
                 ],
                 resources: [
-                    { title: "Why LEDs Matter", content: "LED holiday lights use up to 75% less energy than traditional incandescent bulbs and last up to 25 times longer. This significantly lowers your electricity bill and carbon footprint." },
-                    { title: "Solar Power for Outdoors", content: "For outdoor displays, consider solar-powered lights. They charge during the day and automatically turn on at dusk, requiring no external power source." }
+                    { title: "Why LEDs Matter", content: "LED holiday lights use up to 75% less energy than traditional incandescent bulbs and last up to 25 times longer. This significantly lowers your electricity bill and environmental impact." },
+                    { title: "Solar Power for Outdoors", content: "For outdoor displays, consider solar-powered lights. They charge during the day and automatically turn on at dusk, requiring no external electricity source." }
                 ]
             },
             {
@@ -300,15 +310,15 @@
                     "Compost all vegetable peelings and uncooked scraps."
                 ],
                 resources: [
-                    { title: "Benefits of Local Food", content: "Buying from local farmers' markets or butchers reduces 'food miles,' ensuring fresher produce and supporting your local economy. Look for seasonal ingredients for the best flavor and environmental impact." },
-                    { title: "Smart Leftover Planning", content: "Plan ahead for leftovers. Turkey makes great sandwiches, soups, and curries. Vegetable scraps can be used to make homemade broth. Store leftovers in clear containers so you don't forget them." }
+                    { title: "Benefits of Local Food", content: "Buying from local farmers' markets or butchers reduces 'food miles,' ensuring fresher produce and supporting your local economy. Look for seasonal root vegetables like carrots, potatoes, and parsnips." },
+                    { title: "Smart Leftover Planning", content: "Plan ahead for leftovers. Turkey makes great sandwiches, soups, and curries. Vegetable scraps can be used to make homemade broth. Store food in reusable glass containers." }
                 ]
             },
             {
                 id: 4,
                 title: "Gift Good",
                 description: "Shift focus from quantity to quality. Choose items that last, support ethical labor, or offer experiences rather than physical clutter.",
-                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>`,
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg>`,
                 color: "bg-red-600",
                 position: "right",
                 list: [
@@ -318,8 +328,8 @@
                     "Give consumables (homemade cookies, jams) over trinkets."
                 ],
                 resources: [
-                    { title: "Choosing Ethical Gifts", content: "Look for certifications like Fair Trade, B Corp, or organic. These ensure products are made ethically, respecting workers and the environment. Supporting local artisans is also a great way to give ethically." },
-                    { title: "DIY Gift Ideas", content: "Homemade gifts are personal and thoughtful. Consider making baked goods, infused oils, homemade bath salts, or knitting a scarf. The time and effort put into a DIY gift often mean more than a store-bought item." }
+                    { title: "Choosing Ethical Gifts", content: "Look for certifications like Fair Trade, B Corp, or organic. These ensure products are made ethically, respecting workers and the environment. Experience gifts like concert tickets create memories without waste." },
+                    { title: "DIY Gift Ideas", content: "Homemade gifts are personal and thoughtful. Consider making baked goods, infused oils, homemade bath salts, or knitting a scarf. The time and effort are often appreciated more than store-bought items." }
                 ]
             }
         ];
@@ -330,7 +340,7 @@
         roadmapData.forEach((stop) => {
             const stopHTML = `
                 <div class="flex items-center justify-center w-full flex-col group relative z-10">
-                    <div class="w-16 h-16 ${stop.color} rounded-full border-4 border-white shadow-lg flex items-center justify-center text-white z-20 cursor-pointer transform hover:scale-110 transition-transform duration-300 mb-4 relative" onclick="openModal(${stop.id})">
+                    <div class="w-16 h-16 ${stop.color} rounded-full border-4 border-white shadow-lg flex items-center justify-center text-white z-20 cursor-pointer transform hover:scale-110 transition-transform duration-300">
                         ${stop.icon}
                     </div>
 
