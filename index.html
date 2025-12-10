@@ -216,12 +216,15 @@
             const width = wrapper.offsetWidth;
             const height = wrapper.offsetHeight;
             
-            // Wait for DOM to be ready
+            // Wait for DOM to be ready and fully rendered
             setTimeout(() => {
+                // Recalculate wrapper height after DOM is fully rendered
+                const currentHeight = wrapper.offsetHeight;
+                
                 // Find destination element by its ID (added in HTML)
                 const destination = document.getElementById('destination-card');
                 
-                let lineEndY = height; // Fallback
+                let lineEndY = currentHeight; // Fallback
                 
                 if (destination) {
                     // Calculate center of destination relative to wrapper
@@ -233,8 +236,9 @@
                     lineEndY = destCenterY;
                 }
                 
-                // Set viewBox to match pixel dimensions exactly (1:1 mapping)
-                svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+                // Set viewBox to match pixel dimensions, ensuring height is at least lineEndY
+                const viewBoxHeight = Math.max(currentHeight, lineEndY + 100);
+                svg.setAttribute('viewBox', `0 0 ${width} ${viewBoxHeight}`);
                 // Ensure SVG itself takes defined size if not absolute, though inset-0 handles it
                 
                 // Build straight path - vertical line down the center of the container
@@ -252,7 +256,7 @@
                 path.setAttribute('stroke-linecap', 'round');
                 
                 svg.appendChild(path);
-            }, 100);
+            }, 500);
         }
         
         // Update path on resize
