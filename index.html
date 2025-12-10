@@ -237,7 +237,8 @@
                 }
                 
                 // Set viewBox to match pixel dimensions, ensuring height is at least lineEndY
-                const viewBoxHeight = Math.max(currentHeight, lineEndY + 100);
+                const PATH_END_BUFFER = 100; // Buffer space beyond destination for visual comfort
+                const viewBoxHeight = Math.max(currentHeight, lineEndY + PATH_END_BUFFER);
                 svg.setAttribute('viewBox', `0 0 ${width} ${viewBoxHeight}`);
                 // Ensure SVG itself takes defined size if not absolute, though inset-0 handles it
                 
