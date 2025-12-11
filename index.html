@@ -196,6 +196,62 @@
         </div>
     </div>
 
+    <!-- Ribbon Modal -->
+    <div id="ribbon-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm p-4 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden transform scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-[90vh]" id="ribbon-modal-panel">
+            
+            <div class="h-28 shrink-0 bg-amber-600 flex items-center justify-center relative">
+                <div class="text-white bg-white bg-opacity-20 p-3 rounded-full backdrop-blur-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8l8-4 8 4v8l-8 4-8-4V8z" /></svg>
+                </div>
+                <button onclick="closeRibbonModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 focus:outline-none bg-black bg-opacity-20 rounded-full p-1 hover:bg-opacity-40 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="p-6 md:p-8 overflow-y-auto modal-content grow">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Reusable Ribbons</h2>
+                <p class="text-gray-600 mb-4 text-base leading-relaxed">
+                    Choose fabric or sturdy ribbons that can be untied and saved for future gifts. Keeping a small stash lets you avoid single-use plastic bows while adding a special touch year after year.
+                </p>
+            </div>
+            
+            <div class="bg-gray-50 px-6 py-4 text-center shrink-0">
+                <button onclick="closeRibbonModal()" class="text-sm font-bold text-green-700 hover:text-green-900 uppercase tracking-wide">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Butcher Modal -->
+    <div id="butcher-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm p-4 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden transform scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-[90vh]" id="butcher-modal-panel">
+            
+            <div class="h-28 shrink-0 bg-orange-700 flex items-center justify-center relative">
+                <div class="text-white bg-white bg-opacity-20 p-3 rounded-full backdrop-blur-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <button onclick="closeButcherModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 focus:outline-none bg-black bg-opacity-20 rounded-full p-1 hover:bg-opacity-40 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="p-6 md:p-8 overflow-y-auto modal-content grow">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Why Buy from a Local Butcher?</h2>
+                <p class="text-gray-600 mb-4 text-base leading-relaxed">
+                    Local butchers can source meats from nearby farms, reducing transport emissions and supporting community producers. They can also help you choose the right size bird to avoid waste.
+                </p>
+            </div>
+            
+            <div class="bg-gray-50 px-6 py-4 text-center shrink-0">
+                <button onclick="closeButcherModal()" class="text-sm font-bold text-green-700 hover:text-green-900 uppercase tracking-wide">Close</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <section id="legal" class="bg-white border-t border-green-100 mt-10">
         <div class="max-w-4xl mx-auto px-4 py-8 text-sm text-gray-700">
@@ -299,12 +355,7 @@
                 list: [
                     "Use Furoshiki (Japanese fabric wrapping) techniques.",
                     "Repurpose old maps, newspapers, or sheet music.",
-                    "Decorate with dried orange slices or pine sprigs.",
                     "Save gift bags and ribbons to reuse next year."
-                ],
-                resources: [
-                    { title: "Furoshiki Wrapping Basics", content: "Furoshiki is a traditional Japanese method of using a single piece of cloth to wrap gifts. Lay the cloth flat, place the gift in the center, and tie the corners. It's elegant and zero-waste." },
-                    { title: "Creative Recycled Wrapping", content: "Use old maps, newspapers, or even brown paper grocery bags. Decorate them with natural elements like sprigs of pine, dried orange slices, or cinnamon sticks for a rustic, sustainable look." }
                 ]
             },
             {
@@ -317,30 +368,20 @@
                 list: [
                     "Switch all strands to LED bulbs (use 75% less energy).",
                     "Use timer plugs to ensure lights turn off at bedtime.",
-                    "Opt for beeswax or soy candles over paraffin.",
-                    "Limit outdoor display hours to prime evening time."
-                ],
-                resources: [
-                    { title: "Why LEDs Matter", content: "LED holiday lights use up to 75% less energy than traditional incandescent bulbs and last up to 25 times longer. This significantly lowers your electricity bill and environmental impact." },
-                    { title: "Solar Power for Outdoors", content: "For outdoor displays, consider solar-powered lights. They charge during the day and automatically turn on at dusk, requiring no external electricity source." }
+                    "Choose beeswax or soy candles over paraffin."
                 ]
             },
             {
                 id: 3,
                 title: "Feast Local",
-                description: "The average holiday meal travels 1,500 miles to reach your plate. Buying locally supports community farmers and drastically cuts transportation emissions.",
+                description: "The average holiday meal travels 2,500 km to reach your plate. Buying locally supports community farmers and drastically cuts transportation emissions.",
                 icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>`,
                 color: "bg-orange-600",
                 position: "left",
                 list: [
-                    "Order a duck or turkey from a nearby butcher.",
+                    "Order a duck or goose from a nearby butcher.",
                     "Visit winter farmers' markets for root vegetables.",
-                    "Plan portions carefully to minimize food waste.",
-                    "Compost all vegetable peelings and uncooked scraps."
-                ],
-                resources: [
-                    { title: "Benefits of Local Food", content: "Buying from local farmers' markets or butchers reduces 'food miles,' ensuring fresher produce and supporting your local economy. Look for seasonal root vegetables like carrots, potatoes, and parsnips." },
-                    { title: "Smart Leftover Planning", content: "Plan ahead for leftovers. Turkey makes great sandwiches, soups, and curries. Vegetable scraps can be used to make homemade broth. Store food in reusable glass containers." }
+                    "Plan portions carefully to minimize food waste."
                 ]
             },
             {
@@ -353,12 +394,7 @@
                 list: [
                     "Gift experiences (tickets, classes, memberships).",
                     "Support local artisans and craft markets.",
-                    "Look for 'Fair Trade' certification on imported goods.",
                     "Give consumables (homemade cookies, jams) over trinkets."
-                ],
-                resources: [
-                    { title: "Choosing Ethical Gifts", content: "Look for certifications like Fair Trade, B Corp, or organic. These ensure products are made ethically, respecting workers and the environment. Experience gifts like concert tickets create memories without waste." },
-                    { title: "DIY Gift Ideas", content: "Homemade gifts are personal and thoughtful. Consider making baked goods, infused oils, homemade bath salts, or knitting a scarf. The time and effort are often appreciated more than store-bought items." }
                 ]
             }
         ];
@@ -429,6 +465,44 @@
                     li.appendChild(textNode1);
                     li.appendChild(link);
                     li.appendChild(textNode2);
+                } else if (data.id === 1 && item.includes('ribbons')) {
+                    const beforeText = "Save gift bags and ";
+                    const linkText = "ribbons";
+                    const afterText = " to reuse next year.";
+
+                    const textNode1 = document.createTextNode(beforeText);
+                    const link = document.createElement('a');
+                    link.href = "#";
+                    link.textContent = linkText;
+                    link.className = "text-green-700 underline hover:text-green-900 font-medium cursor-pointer";
+                    link.onclick = (e) => {
+                        e.preventDefault();
+                        showRibbonModal();
+                    };
+                    const textNode2 = document.createTextNode(afterText);
+
+                    li.appendChild(textNode1);
+                    li.appendChild(link);
+                    li.appendChild(textNode2);
+                } else if (data.id === 3 && index === 0) {
+                    const beforeText = "Order a duck or goose from a nearby ";
+                    const linkText = "butcher";
+                    const afterText = ".";
+
+                    const textNode1 = document.createTextNode(beforeText);
+                    const link = document.createElement('a');
+                    link.href = "#";
+                    link.textContent = linkText;
+                    link.className = "text-green-700 underline hover:text-green-900 font-medium cursor-pointer";
+                    link.onclick = (e) => {
+                        e.preventDefault();
+                        showButcherModal();
+                    };
+                    const textNode2 = document.createTextNode(afterText);
+
+                    li.appendChild(textNode1);
+                    li.appendChild(link);
+                    li.appendChild(textNode2);
                 } else {
                     li.textContent = item;
                 }
@@ -477,6 +551,54 @@
 
         furoshikiModal.addEventListener('click', (e) => {
             if (e.target === furoshikiModal) closeFuroshikiModal();
+        });
+
+        // Ribbon Modal Logic
+        const ribbonModal = document.getElementById('ribbon-modal');
+        const ribbonModalPanel = document.getElementById('ribbon-modal-panel');
+
+        function showRibbonModal() {
+            ribbonModal.classList.remove('hidden');
+            setTimeout(() => {
+                ribbonModalPanel.classList.remove('scale-95', 'opacity-0');
+                ribbonModalPanel.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeRibbonModal() {
+            ribbonModalPanel.classList.remove('scale-100', 'opacity-100');
+            ribbonModalPanel.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                ribbonModal.classList.add('hidden');
+            }, 300);
+        }
+
+        ribbonModal.addEventListener('click', (e) => {
+            if (e.target === ribbonModal) closeRibbonModal();
+        });
+
+        // Butcher Modal Logic
+        const butcherModal = document.getElementById('butcher-modal');
+        const butcherModalPanel = document.getElementById('butcher-modal-panel');
+
+        function showButcherModal() {
+            butcherModal.classList.remove('hidden');
+            setTimeout(() => {
+                butcherModalPanel.classList.remove('scale-95', 'opacity-0');
+                butcherModalPanel.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeButcherModal() {
+            butcherModalPanel.classList.remove('scale-100', 'opacity-100');
+            butcherModalPanel.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                butcherModal.classList.add('hidden');
+            }, 300);
+        }
+
+        butcherModal.addEventListener('click', (e) => {
+            if (e.target === butcherModal) closeButcherModal();
         });
 
         // Snow Generation
